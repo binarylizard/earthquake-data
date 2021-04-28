@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spinner_array" >
+        <item>Sort</item>
+        <item>Title Wise</item>
+        <item>Time Wise</item>
+    </string-array>
+
+</resources>
