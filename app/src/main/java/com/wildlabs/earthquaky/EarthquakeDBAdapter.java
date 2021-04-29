@@ -32,9 +32,11 @@ public class EarthquakeDBAdapter extends RecyclerView.Adapter<EarthquakeDBAdapte
     }
 
     public void setData(List<Properties> featureList){
-        this.featureList = featureList;
-        fullFeatureList = new ArrayList<>(featureList);
-        notifyDataSetChanged();
+        if(featureList!=null){
+            this.featureList = featureList;
+            fullFeatureList = new ArrayList<>(featureList);
+            notifyDataSetChanged();
+        }
     }
 
     @NonNull

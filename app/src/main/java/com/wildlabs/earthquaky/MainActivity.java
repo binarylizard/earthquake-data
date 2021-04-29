@@ -78,31 +78,31 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        if(mainViewModel.getPropertiesList()==null){
-            mainViewModel.returnEqData().observe(this, new Observer<List<EarthquakeData.Feature>>() {
-                @Override
-                public void onChanged(List<EarthquakeData.Feature> features) {
-                    adapter.setData(features);
-                    dataSize = mainViewModel.getDataSize();
-                    progressBar.setVisibility(View.GONE);
-                    featuresList = features;
-                    for(EarthquakeData.Feature feature: featuresList){
-                        mainViewModel.insert(feature.properties);
-                    }
-                }
-            });
-        } else {
-            mainViewModel.getPropertiesList().observe(this, new Observer<List<Properties>>() {
-                @Override
-                public void onChanged(List<Properties> properties) {
+        mainViewModel.getPropertiesList().observe(this, new Observer<List<Properties>>() {
+            @Override
+            public void onChanged(List<Properties> properties) {
+                if(!properties.isEmpty()){
                     EarthquakeDBAdapter adapter = new EarthquakeDBAdapter(MainActivity.this);
                     rvEarthquake.setLayoutManager(new LinearLayoutManager(MainActivity.this));
                     rvEarthquake.setAdapter(adapter);
                     adapter.setData(properties);
                     progressBar.setVisibility(View.GONE);
+                } else {
+                    mainViewModel.returnEqData().observe(MainActivity.this, new Observer<List<EarthquakeData.Feature>>() {
+                        @Override
+                        public void onChanged(List<EarthquakeData.Feature> features) {
+                            adapter.setData(features);
+                            dataSize = mainViewModel.getDataSize();
+                            featuresList = features;
+                            for(EarthquakeData.Feature feature: featuresList){
+                                mainViewModel.insert(feature.properties);
+                            }
+                            progressBar.setVisibility(View.GONE);
+                        }
+                    });
                 }
-            });
-        }
+            }
+        });
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -145,11 +145,11 @@ public class MainActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(++check>1){
                     String selectedOption = spSort.getSelectedItem().toString();
-                    if(selectedOption.equals("Title Wise")){
-                        mainViewModel.sortByTitle();
-                    } else if(selectedOption.equals("Time Wise")){
-                        mainViewModel.sortByTime();
-                    }
+//                    if(selectedOption.equals("Title Wise")){
+//                        mainViewModel.sortByTitle();
+//                    } else if(selectedOption.equals("Time Wise")){
+//                        mainViewModel.sortByTime();
+//                    }
                 }
             }
 

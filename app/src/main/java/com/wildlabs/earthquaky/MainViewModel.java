@@ -7,8 +7,10 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Transformations;
 
 import com.wildlabs.earthquaky.models.EarthquakeData;
+import com.wildlabs.earthquaky.models.Feature;
 import com.wildlabs.earthquaky.models.Properties;
 import com.wildlabs.earthquaky.roomdatabase.EarthquakeDB;
 import com.wildlabs.earthquaky.roomdatabase.EarthquakeDao;
@@ -51,17 +53,6 @@ public class MainViewModel extends AndroidViewModel {
 
     public LiveData<List<Properties>> getPropertiesList(){
         return propertiesList;
-    }
-
-    public void sortByTitle(){
-            Collections.sort(featuresList.getValue(), new Comparator<EarthquakeData.Feature>() {
-                @Override
-                public int compare(EarthquakeData.Feature o1, EarthquakeData.Feature o2) {
-                    return o1.properties.title.compareTo(o2.properties.title);
-
-                }
-            });
-            featuresList.postValue(featuresList.getValue());
     }
 
     public void sortByTime() {

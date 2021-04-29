@@ -26,6 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:dropDownWidth="match_parent"
+        android:visibility="gone"
         android:spinnerMode="dropdown"/>
 
     <SeekBar
@@ -33,6 +34,7 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:min="1"
+        android:visibility="gone"
         android:max="100"
         android:layout_toEndOf="@id/spSort"
         android:layout_marginStart="8dp"/>
@@ -45,6 +47,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="30dp"
         android:textColor="#444"
+        android:visibility="gone"
         android:text="0"/>
 
     <ImageView
@@ -53,6 +56,7 @@
         android:layout_height="20dp"
         android:src="@drawable/remove"
         android:layout_below="@id/seekBar"
+        android:visibility="gone"
         android:layout_alignParentEnd="true" />
 
     <androidx.recyclerview.widget.RecyclerView
