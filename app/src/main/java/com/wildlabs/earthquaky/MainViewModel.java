@@ -10,6 +10,8 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.wildlabs.earthquaky.models.EarthquakeData;
 import com.wildlabs.earthquaky.models.Properties;
+import com.wildlabs.earthquaky.roomdatabase.EarthquakeDB;
+import com.wildlabs.earthquaky.roomdatabase.EarthquakeDao;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -52,14 +54,14 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     public void sortByTitle(){
-        Collections.sort(featuresList.getValue(), new Comparator<EarthquakeData.Feature>() {
-            @Override
-            public int compare(EarthquakeData.Feature o1, EarthquakeData.Feature o2) {
-                return o1.properties.title.compareTo(o2.properties.title);
+            Collections.sort(featuresList.getValue(), new Comparator<EarthquakeData.Feature>() {
+                @Override
+                public int compare(EarthquakeData.Feature o1, EarthquakeData.Feature o2) {
+                    return o1.properties.title.compareTo(o2.properties.title);
 
-            }
-        });
-        featuresList.postValue(featuresList.getValue());
+                }
+            });
+            featuresList.postValue(featuresList.getValue());
     }
 
     public void sortByTime() {
@@ -70,11 +72,12 @@ public class MainViewModel extends AndroidViewModel {
             }
         });
         featuresList.postValue(featuresList.getValue());
+
     }
 
     public void getEqData(){
 
-        apiInterface.getTodos().enqueue(new Callback<EarthquakeData>() {
+        apiInterface.getEarthquakeData().enqueue(new Callback<EarthquakeData>() {
             @Override
             public void onResponse(Call<EarthquakeData> call, Response<EarthquakeData> response) {
                 featuresList.postValue(response.body().features);

@@ -69,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
                         swipeRefreshLayout.setRefreshing(false);
                         if(dataSize==mainViewModel.getDataSize()){
                             Toast.makeText(MainActivity.this,"No New Items, Data is already Updated!", Toast.LENGTH_SHORT).show();
-                            Toast.makeText(MainActivity.this,"No New Items, Data is already Updated!", Toast.LENGTH_SHORT).show();
                         }
                         swipeRefreshLayout.setRefreshing(false);
 
@@ -77,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
                 }, 1000);
             }
         });
+
 
         if(mainViewModel.getPropertiesList()==null){
             mainViewModel.returnEqData().observe(this, new Observer<List<EarthquakeData.Feature>>() {
@@ -95,7 +95,11 @@ public class MainActivity extends AppCompatActivity {
             mainViewModel.getPropertiesList().observe(this, new Observer<List<Properties>>() {
                 @Override
                 public void onChanged(List<Properties> properties) {
-//                    adapter.setData(properties);
+                    EarthquakeDBAdapter adapter = new EarthquakeDBAdapter(MainActivity.this);
+                    rvEarthquake.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+                    rvEarthquake.setAdapter(adapter);
+                    adapter.setData(properties);
+                    progressBar.setVisibility(View.GONE);
                 }
             });
         }

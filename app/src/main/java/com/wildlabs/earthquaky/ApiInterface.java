@@ -8,6 +8,6 @@ import retrofit2.http.GET;
 public interface ApiInterface {
 
     @GET("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson")
-    Call<EarthquakeData> getTodos();
+    Call<EarthquakeData> getEarthquakeData();
 
 }

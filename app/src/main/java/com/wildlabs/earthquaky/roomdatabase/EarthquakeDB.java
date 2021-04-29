@@ -1,4 +1,4 @@
-package com.wildlabs.earthquaky;
+package com.wildlabs.earthquaky.roomdatabase;
 
 import android.content.Context;
 
@@ -18,7 +18,7 @@ public abstract class EarthquakeDB extends RoomDatabase {
 
     public static volatile EarthquakeDB earthquakeDBInstance;
 
-    static EarthquakeDB getDatabase(final Context context){
+    public static EarthquakeDB getDatabase(final Context context){
         if(earthquakeDBInstance == null){
             synchronized (EarthquakeDB.class){
                 if(earthquakeDBInstance == null){
